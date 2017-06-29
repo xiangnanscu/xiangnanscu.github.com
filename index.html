@@ -31,11 +31,11 @@
 <!-- <script src="https://cdn.lzwlkj.cn/highlight.pack.js"></script> -->
 
 <script type="text/javascript">
-// marked.setOptions({
-//   highlight: function (code) {
-//     return hljs.highlightAuto(code).value;
-//   }
-// });
+marked.setOptions({
+  highlight: function (code) {
+    return hljs.highlightAuto(code).value;
+  }
+});
 var [username, github, com] = window.location.host.split('.')
 username = username || 'xiangnanscu'
 var PREFIX = `https://api.github.com/repos/${username}/${username}.github.com/contents`
