@@ -143,7 +143,7 @@ var fileView = {
           Vue.http.get(url).then(
             response => {
               CACHE[url] = response.body
-              this.content = marked(atob(response.body.content))
+              this.content = marked(decodeURIComponent(escape(atob(response.body.content))))
               this.title = response.body.name.slice(0, -3)
             },
             response => {
