@@ -1,6 +1,6 @@
 var PREFIX = 'https://api.github.com/repos/xiangnanscu/lua-resty-mvc/contents'
 
-var ft = `
+var d = `
 <div>
 <div class="panel panel-default">
   <div class="panel-heading">
