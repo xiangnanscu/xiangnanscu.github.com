@@ -1,7 +1,7 @@
-#缘由
+# 缘由
 随着功能需求的深入, openresty领域的包已经不够用了, 需要lua领域本身累积的库, 也就是luarocks.
 本文讲解了windows 10桌面和ubuntu server两套系统的方法
-#Ubuntu Server
+# Ubuntu Server
 比较简单, 无脑敲命令即可
 ```
 $ wget https://luarocks.org/releases/luarocks-2.4.1.tar.gz
@@ -13,7 +13,7 @@ $ cd luarocks-2.4.1
     --with-lua-include=/usr/local/openresty/luajit/include/luajit-2.1
 make build && make install
 ```
-###安装luasql-postgres
+### 安装luasql-postgres
 ```
 apt-get install libpq-dev
 luarocks PGSQL_INCDIR=/usr/include/postgresql/ install luasql-postgres
