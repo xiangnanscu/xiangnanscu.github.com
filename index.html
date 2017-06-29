@@ -44,7 +44,7 @@ var d = `
   <div class="panel-body">
     <ul v-for="file in files" class="nav nav-pills nav-stacked">
       <li role="presentation">
-        <router-link :to="'/file/'+file.path" role="button">{{file.name}}</router-link>
+        <router-link :to="'/file'+file.path" role="button">{{file.name}}</router-link>
       </li>
     </ul>
   </div>
@@ -58,7 +58,7 @@ var d = `
   <div class="panel-body">
     <ul v-for="folder in folders" class="nav nav-pills nav-stacked">
       <li role="presentation">
-        <router-link :to="'/folder/'+folder.path">{{folder.name}}</router-link>
+        <router-link :to="'/folder'+folder.path">{{folder.name}}</router-link>
       </li>
     </ul>
   </div>
