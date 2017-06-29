@@ -136,14 +136,14 @@ var fileView = {
         var url = PREFIX + this.path
         if (CACHE[url]) {
           console.log('read from cache')
-          this.content = marked(atob(CACHE[url].content))
+          this.content = CACHE[url].content
           this.title = CACHE[url].name        
         } else {
           Vue.http.get(url).then(
             response => {
-              CACHE[url] = response.body
               this.content = marked(decodeURIComponent(escape(atob(response.body.content))))
               this.title = response.body.name.slice(0, -3)
+              CACHE[url] = {content: this.content, title: this.title}
             },
             response => {
               alert('Fail to get tree')
