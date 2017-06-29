@@ -112,7 +112,7 @@ var folderView = {
     },
     computed: {
       files () {
-        return this.tree.filter(e => e.type == 'file')
+        return this.tree.filter(e => e.type == 'file' && e.name != 'index.html' && e.name != 'README.md')
       },
       folders () {
         return this.tree.filter(e => e.type == 'dir')
