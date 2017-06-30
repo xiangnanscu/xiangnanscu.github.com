@@ -90,8 +90,12 @@ var f = `
       <template v-else>{{e.name}}</template>
     </li>
   </ol> 
+  <p> 
+    <a class="btn btn-default" :href="html_url">github</a>  
+    <a class="btn btn-default" :href="download_url">raw</a>
+    <a class="btn btn-default" :href="edit_url">edit</a> 
+  </p>
   <h1 class="title">{{title}}</h1>
-  <p> <a class="btn btn-default" :href="html_url">github</a>  <a class="btn btn-default" :href="download_url">raw</a> </p>
   <div class="markdown-body" v-html="content"></div>
 </div>
 `
@@ -213,6 +217,9 @@ var fileView = {
       this.fetchData()
     },
     computed: {
+      edit_url () {
+        return this.html_url.replace('/blob/', '/edit/')
+      },
       navList () {
         var p = '/folder'
         var ret = this.$route.params.path.slice(1).split('/').slice(0, -1)
