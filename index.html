@@ -91,14 +91,14 @@ var f = `
       <template v-else>{{e.name}}</template>
     </li>
   </ol> 
+  <h1 class="title">{{title}}</h1>
+  <p>{{commit_time}}</p>
+  <div class="markdown-body" v-html="content"></div>
   <p> 
     <a class="btn btn-default" :href="html_url">github</a>  
     <a class="btn btn-default" :href="download_url">raw</a>
     <a class="btn btn-default" :href="edit_url">edit</a> 
   </p>
-  <h1 class="title">{{title}}</h1>
-  <p>{{commit_time}}</p>
-  <div class="markdown-body" v-html="content"></div>
 </div>
 `
 var ACTIVE_ROOT = [{active: true, name: 'home', path: '/'}]
