@@ -97,6 +97,7 @@ var f = `
     <a class="btn btn-default" :href="edit_url">edit</a> 
   </p>
   <h1 class="title">{{title}}</h1>
+  <p>{{commit_time}}</p>
   <div class="markdown-body" v-html="content"></div>
 </div>
 `
@@ -191,7 +192,7 @@ var fileView = {
           this.title = CACHE[url].title    
           this.download_url = CACHE[url].download_url   
           this.html_url = CACHE[url].html_url       
-          this.commit_url = CACHE[url].commit_url
+          this.commit_time = CACHE[url].commit_time
         } else {
           Vue.http.get(url).then(
             response => {
@@ -201,7 +202,14 @@ var fileView = {
               this.download_url = b.download_url
               this.html_url = b.html_url
               CACHE[url] = {content: this.content, title: this.title, 
-                download_url: this.download_url, html_url: this.html_url}
+                download_url: this.download_url, html_url: this.html_url,
+              }
+              Vue.http.get(COMMIT_URL+b.sha).then(
+                response => {
+                  this.commit_time = '2010' //response.obdy
+                },
+                response => {},
+              )
             },
             response => {
               alert('Fail to get tree')
