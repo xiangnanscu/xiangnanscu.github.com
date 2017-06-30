@@ -21,6 +21,12 @@
   </head>
   <body>
   <div id="app" class="container">
+    <ol class="breadcrumb">
+      <li v-for="e in navList" :class="{active:e.active}">
+        <router-link v-if="e.active" :to="e.path">{{e.name}}</router-link>
+        <template v-else>{{e.name}}</template>
+      </li>
+    </ol> 
     <router-view></router-view>
   </div>
 <script src="https://cdn.bootcss.com/vue/2.3.4/vue.min.js"></script>
@@ -77,6 +83,7 @@ var d = `
 var f = `
 <div>
   <h1 class="title">{{title}}</h1>
+  <p> <a class="btn btn-default" :href="html_url">github</a>  <a class="btn btn-default" :href="download_url">raw</a> </p>
   <div class="markdown-body" v-html="content"></div>
 </div>
 `
@@ -138,6 +145,8 @@ var fileView = {
       return {
         content: '',
         title: '',
+        download_url: '',
+        html_url: '',
       }
     },
     methods: {
@@ -146,13 +155,19 @@ var fileView = {
         if (CACHE[url]) {
           console.log('read from cache')
           this.content = CACHE[url].content
-          this.title = CACHE[url].title        
+          this.title = CACHE[url].title    
+          this.download_url = CACHE[url].download_url   
+          this.html_url = CACHE[url].html_url       
         } else {
           Vue.http.get(url).then(
             response => {
-              this.content = marked(decodeURIComponent(escape(atob(response.body.content))))
-              this.title = response.body.name.slice(0, -3)
-              CACHE[url] = {content: this.content, title: this.title}
+              var b = response.body
+              this.content = marked(decodeURIComponent(escape(atob(b.content))))
+              this.title = b.name.slice(0, -3)
+              this.download_url = b.download_url
+              this.html_url = b.html_url
+              CACHE[url] = {content: this.content, title: this.title, 
+                download_url: this.download_url, html_url: this.html_url}
             },
             response => {
               alert('Fail to get tree')
@@ -205,6 +220,22 @@ var router = new VueRouter({
 app = new Vue({
   el: '#app',
   router: router,
+  computed: {
+    navList () {
+      var p = '/folder'
+      var ret = this.$route.params.path.slice(1).split('/').map(
+        name => {
+          p = p + '/' + name
+          return {active: true, name: name, path: p}
+        }
+      )
+      var current = ret[ret.length-1]
+      current.active = false
+      if (current.name.slice(-3) == '.md')
+        current.name = current.name.slice(0, -3)
+      return ret
+    },
+  },
 })
 
 
