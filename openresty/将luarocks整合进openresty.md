@@ -1,20 +1,19 @@
 # 缘由
-随着功能需求的深入, openresty领域的包已经不够用了, 需要lua领域本身累积的库, 也就是luarocks.
-本文讲解了windows 10桌面和ubuntu server两套系统的方法
+随着功能需求的深入, openresty领域的包已经不够用了, 需要lua领域本身累积的库, 也就是luarocks.本文讲解了windows 10桌面和ubuntu server两套系统的方法
 # Ubuntu Server
 比较简单, 无脑敲命令即可
-```
+```shell
 $ wget https://luarocks.org/releases/luarocks-2.4.1.tar.gz
 $ tar zxpf luarocks-2.4.1.tar.gz
 $ cd luarocks-2.4.1
-./configure --prefix=/usr/local/openresty/luajit \
+$ ./configure --prefix=/usr/local/openresty/luajit \
     --with-lua=/usr/local/openresty/luajit/ \
     --lua-suffix=jit \
     --with-lua-include=/usr/local/openresty/luajit/include/luajit-2.1
-make build && make install
+$ make build && make install
 ```
 ### 安装luasql-postgres
-```
+```shell
 apt-get install libpq-dev
 luarocks PGSQL_INCDIR=/usr/include/postgresql/ install luasql-postgres
 ```
@@ -22,9 +21,9 @@ luarocks PGSQL_INCDIR=/usr/include/postgresql/ install luasql-postgres
 mysql同理. 安装之后
 `luarocks install luasql-mysql MYSQL_INCDIR=/usr/include/mysql `
 
-#Windows 10
+# Windows 10
 这个就比较复杂了. 
-##安装MinGW
+## 安装MinGW
 其实这个是可选项, 如果你的系统路径能找到MSVC的编译器, 那么这一步可以忽略. 
 为了让以后windwos进行linux相关的作业简单点, 长痛不如短痛, 干脆就装了MinGW吧.
 
@@ -34,12 +33,12 @@ mysql同理. 安装之后
 
 国内网速不是很好,断断续续的, 可能要等半天. 但最终我还是安装上了.
 按默认路径安装你会发现`C:\MinGW\bin\mingw32-gcc.exe`这个玩意出现, 它就是luarocks要的东西.**最后把C:\MinGW\bin加入windows环境变量**
-##下载luarocks
+## 下载luarocks
 以2.4.2为例, windows版的下载链接:http://luarocks.github.io/luarocks/releases/luarocks-2.4.2-win32.zip
 下载完解压,这里注意下, 以管理员权限打开cmd窗口再cd进luarocks-2.4.2-win32文件夹
-##配置并安装luarocks
+## 配置并安装luarocks
 这里, 假设windows上openresty文件夹的路径为:`%USERPROFILE%\Desktop\openresty`
-##开始安装
+## 开始安装
 在cmd依次敲下面两个命令
 ```
 set PREFIX=%USERPROFILE%\Desktop\openresty
@@ -53,7 +52,7 @@ install /P %PREFIX%\luarocks /SELFCONTAINED /INC %PREFIX%\include\luajit-2.1 /LI
 /MW表示用`mingw32-gcc.exe`编译器.
 ## 完成安装
 正常情况下. 在命令行看到如下输出:
-```
+```shell
 C:\Users\xn\Desktop\luarocks-2.4.2-win32>install /P %PREFIX%\luarocks /SELFCONTAINED /INC %PREFIX%\include\luajit-2.1 /LIB %PREFIX% /BIN %PREFIX% /MW
 
 C:\Users\xn\Desktop\luarocks-2.4.2-win32>rem=rem --[[
@@ -150,12 +149,12 @@ http {
     lua_package_cpath "C:\Users\xn\Desktop\openresty\luarocks\systree\lib\lua\5.1\?.dll;;";
 }
 ```
-#Hello world
+# Hello world
 最后lua里面require('lfs'), 大功告成
 
 
 
-#参考
+# 参考
 https://github.com/luarocks/luarocks/wiki/Installation-instructions-for-Windows
 http://www.tuicool.com/articles/fQZVJjQ
 https://luarocks.org/
