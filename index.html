@@ -21,12 +21,6 @@
   </head>
   <body>
   <div id="app" class="container">
-    <ol class="breadcrumb">
-      <li v-for="e in navList" :class="{active:e.active}">
-        <router-link v-if="e.active" :to="e.path">{{e.name}}</router-link>
-        <template v-else>{{e.name}}</template>
-      </li>
-    </ol> 
     <router-view></router-view>
   </div>
 <script src="https://cdn.bootcss.com/vue/2.3.4/vue.min.js"></script>
@@ -50,6 +44,14 @@ var CACHE = {}
 
 var d = `
 <div>
+
+<ol class="breadcrumb">
+  <li v-for="e in navList" :class="{active:e.active}">
+    <router-link v-if="e.active" :to="e.path">{{e.name}}</router-link>
+    <template v-else>{{e.name}}</template>
+  </li>
+</ol> 
+
 <div class="panel panel-default">
   <div class="panel-heading">
     <h3 class="panel-title">
@@ -82,11 +84,20 @@ var d = `
 `
 var f = `
 <div>
+  <ol class="breadcrumb">
+    <li v-for="e in navList" :class="{active:e.active}">
+      <router-link v-if="e.active" :to="e.path">{{e.name}}</router-link>
+      <template v-else>{{e.name}}</template>
+    </li>
+  </ol> 
   <h1 class="title">{{title}}</h1>
   <p> <a class="btn btn-default" :href="html_url">github</a>  <a class="btn btn-default" :href="download_url">raw</a> </p>
   <div class="markdown-body" v-html="content"></div>
 </div>
 `
+var ACTIVE_ROOT = [{active: true, name: 'home', path: '/'}]
+var ROOT = [{active: false, name: 'home', path: '/'}]
+
 var folderView = {
     template: d,
     props: {
@@ -133,6 +144,22 @@ var folderView = {
       folders () {
         return this.tree.filter(e => e.type == 'dir')
       },   
+      navList () {
+        var path = this.$route.params.path
+        if (path=='') {
+          return ROOT
+        } else {
+          var p = '/folder'
+          var ret = path.slice(1).split('/').map(
+            name => {
+              p = p + '/' + name
+              return {active: true, name: name, path: p}
+            }
+          )
+          ret[ret.length-1].active = false
+          return ACTIVE_ROOT.concat(ret)
+        }
+      },
     },
 }
 
@@ -186,9 +213,19 @@ var fileView = {
       this.fetchData()
     },
     computed: {
-
+      navList () {
+        var p = '/folder'
+        var ret = this.$route.params.path.slice(1).split('/').slice(0, -1)
+          .filter(name=>name!="").map(
+            name => {
+              p = p + '/' + name
+              return {active: true, name: name, path: p}
+            }
+        )
+        return ACTIVE_ROOT.concat(ret)
+      },
     },
-}
+  }
 
 var router = new VueRouter({
   linkActiveClass: "router-link-active",
@@ -217,25 +254,9 @@ var router = new VueRouter({
   ],
 })
 
-app = new Vue({
+new Vue({
   el: '#app',
   router: router,
-  computed: {
-    navList () {
-      var p = '/folder'
-      var ret = this.$route.params.path.slice(1).split('/').map(
-        name => {
-          p = p + '/' + name
-          return {active: true, name: name, path: p}
-        }
-      )
-      var current = ret[ret.length-1]
-      current.active = false
-      if (current.name.slice(-3) == '.md')
-        current.name = current.name.slice(0, -3)
-      return ret
-    },
-  },
 })
 
 
