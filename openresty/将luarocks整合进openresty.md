@@ -155,7 +155,7 @@ http {
 
 
 # 参考
-https://github.com/luarocks/luarocks/wiki/Installation-instructions-for-Windows
-http://www.tuicool.com/articles/fQZVJjQ
-https://luarocks.org/
-https://stackoverflow.com/questions/43189975/how-to-install-luasql-on-linux-ubuntu-16
+- https://github.com/luarocks/luarocks/wiki/Installation-instructions-for-Windows
+- http://www.tuicool.com/articles/fQZVJjQ
+- https://luarocks.org/
+- https://stackoverflow.com/questions/43189975/how-to-install-luasql-on-linux-ubuntu-16
