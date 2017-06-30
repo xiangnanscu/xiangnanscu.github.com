@@ -39,6 +39,7 @@ marked.setOptions({
 var [username, github, com] = window.location.host.split('.')
 username = username || 'xiangnanscu'
 var PREFIX = `https://api.github.com/repos/${username}/${username}.github.com/contents`
+var COMMIT_URL = `https://api.github.com/repos/${username}/${username}.github.com/git/commits/`
 
 var CACHE = {}
 
@@ -178,6 +179,7 @@ var fileView = {
         title: '',
         download_url: '',
         html_url: '',
+        commit_time: '',
       }
     },
     methods: {
@@ -189,6 +191,7 @@ var fileView = {
           this.title = CACHE[url].title    
           this.download_url = CACHE[url].download_url   
           this.html_url = CACHE[url].html_url       
+          this.commit_url = CACHE[url].commit_url
         } else {
           Vue.http.get(url).then(
             response => {
