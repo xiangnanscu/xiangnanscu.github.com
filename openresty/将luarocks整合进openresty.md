@@ -141,7 +141,7 @@ For the current user that value is: C:\Users\xn\AppData\Roaming.
 ```
 提示得很贴心了.把`%USERPROFILE%\Desktop\openresty\luarocks`加入系统路径, 再试试`luarocks install luafilesystem`
 如果一切顺利,你会发现`%USERPROFILE%\Desktop\openresty\luarocks\systree\lib\lua\5.1`下出现了`lfs.dll`, 这就说明安装成功了.
-#配置nginx路径
+# 配置nginx路径
 包是成功安装好了, 那么怎么让nginx能找到它呢, 在配置文件里这样搞:
 ```
 http {
@@ -150,7 +150,7 @@ http {
 }
 ```
 # Hello world
-最后lua里面require('lfs'), 大功告成
+最后lua里面`require('lfs')`, 大功告成
 
 
 
