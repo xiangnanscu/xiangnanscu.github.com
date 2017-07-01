@@ -52,6 +52,7 @@ var [username, github, com] = window.location.host.split('.')
 username = username || 'xiangnanscu'
 var PREFIX = `https://api.github.com/repos/${username}/${username}.github.com/contents`
 var COMMIT_URL = `https://api.github.com/repos/${username}/${username}.github.com/git/commits/`
+var REQUEST_TIMEOUT = 3000 // 请求github api的最长时间
 
 var CACHE = {}
 
@@ -82,7 +83,7 @@ var d = `
 <div class="panel panel-default">
   <div class="panel-heading">
     <h3 class="panel-title">
-      类别 ({{folders.length}})
+      文件夹 ({{folders.length}})
     </h3>
   </div>
   <div class="panel-body">
@@ -135,7 +136,7 @@ var folderView = {
           this.tree = CACHE[url]   
         } else {
           bus.$emit('set-loading')
-          Vue.http.get(url, {timeout:2000}).then(
+          Vue.http.get(url, {timeout: REQUEST_TIMEOUT}).then(
             response => {
               bus.$emit('set-loading')
               // console.log(response)
@@ -144,7 +145,8 @@ var folderView = {
             },
             response => {
               bus.$emit('set-loading')
-              bus.$emit('set-error', response.bodyText||'加载数据失败')
+              bus.$emit('set-error', response.bodyText||'加载文件夹失败, 将自动重新尝试')
+              setTimeout(()=>{this.fetchData()}, REQUEST_TIMEOUT + 500)
               // console.log('Fail to get tree', response)
             }
           )
@@ -212,7 +214,7 @@ var fileView = {
           // this.commit_time = CACHE[url].commit_time
         } else {
           bus.$emit('set-loading')
-          Vue.http.get(url, {timeout:2000}).then(
+          Vue.http.get(url, {timeout: REQUEST_TIMEOUT}).then(
             response => {
               bus.$emit('set-loading')
               var b = response.body
@@ -232,7 +234,8 @@ var fileView = {
             },
             response => {
               bus.$emit('set-loading')
-              bus.$emit('set-error', response.bodyText||'加载数据失败, 请刷新页面尝试')
+              bus.$emit('set-error', response.bodyText||'加载文章失败, 将自动重新尝试')
+              setTimeout(()=>{this.fetchData()}, REQUEST_TIMEOUT + 500)
             }
           )
         }        
