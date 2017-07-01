@@ -18,20 +18,7 @@
 </template>
 
 <script>
-import {CACHE} from './app.vue' 
-
-var REQUEST_TIMEOUT = 3000 // 请求github api的最长时间
-var ERROR_DISPLAY_TIME = 3000
-var ACTIVE_ROOT = [{
-    active: true,
-    name: 'home',
-    path: '/'
-}]
-var ROOT = [{
-    active: false,
-    name: 'home',
-    path: '/'
-}]
+import {PREFIX, CACHE, REQUEST_TIMEOUT, ACTIVE_ROOT, ROOT, ERROR_DISPLAY_TIME} from './app.vue' 
 
 export default {
     props: {

@@ -12,17 +12,17 @@ import fileView from './file.vue'
 
 var bus = new Vue()
 var username = window.location.host.split('.')[0] || 'xiangnanscu'
-var PREFIX = 'https://api.github.com/repos/'+username+'/'+username+'.github.com/contents'
-var COMMIT_URL = 'https://api.github.com/repos/'+username+'/'+username+'.github.com/git/commits/'
-var REQUEST_TIMEOUT = 3000 // 请求github api的最长时间
-var ERROR_DISPLAY_TIME = 3000
-var CACHE = {}
-var ACTIVE_ROOT = [{
+export var PREFIX = 'https://api.github.com/repos/'+username+'/'+username+'.github.com/contents'
+export var COMMIT_URL = 'https://api.github.com/repos/'+username+'/'+username+'.github.com/git/commits/'
+export var REQUEST_TIMEOUT = 3000 // 请求github api的最长时间
+export var ERROR_DISPLAY_TIME = 3000
+export var CACHE = {}
+export var ACTIVE_ROOT = [{
     active: true,
     name: 'home',
     path: '/'
 }]
-var ROOT = [{
+export var ROOT = [{
     active: false,
     name: 'home',
     path: '/'
@@ -60,7 +60,6 @@ var router = new VueRouter({
     }, ],
 })
 
-export var CACHE = CACHE
 export default {
     data() {
         return {

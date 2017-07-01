@@ -40,100 +40,88 @@
 </template>
 
 <script>
-import {CACHE} from './app.vue' 
+import {PREFIX, CACHE, REQUEST_TIMEOUT, ACTIVE_ROOT, ROOT, ERROR_DISPLAY_TIME} from './app.vue' 
 
-var REQUEST_TIMEOUT = 3000 // 请求github api的最长时间
-var ERROR_DISPLAY_TIME = 3000
-var ACTIVE_ROOT = [{
-    active: true,
-    name: 'home',
-    path: '/'
-}]
-var ROOT = [{
-    active: false,
-    name: 'home',
-    path: '/'
-}]
-    export default {
-        props: {
-            path: {
-                type: String,
-                default: ''
-            },
+export default {
+    props: {
+        path: {
+            type: String,
+            default: ''
         },
-        data() {
-            return {
-                tree: [],
+    },
+    data() {
+        return {
+            tree: [],
+        }
+    },
+    methods: {
+        fetchData() {
+            var url = PREFIX + this.path
+            console.log('folder:', url)
+            if (CACHE[url]) {
+                console.log('read from cache')
+                this.tree = CACHE[url]
+            }
+            else {
+                bus.$emit('set-loading')
+                Vue.http.get(url, {
+                    timeout: REQUEST_TIMEOUT
+                }).then(
+                    response => {
+                        bus.$emit('set-loading')
+                            // console.log(response)
+                        CACHE[url] = response.body
+                        this.tree = response.body
+                    },
+                    response => {
+                        bus.$emit('set-loading')
+                        bus.$emit('set-error', response.bodyText || '加载文件夹失败, 将自动重新尝试')
+                        setTimeout(() => {
+                                this.fetchData()
+                            }, REQUEST_TIMEOUT + 500)
+                            // console.log('Fail to get tree', response)
+                    }
+                )
             }
         },
-        methods: {
-            fetchData() {
-                var url = PREFIX + this.path
-                console.log('folder:', url)
-                if (CACHE[url]) {
-                    console.log('read from cache')
-                    this.tree = CACHE[url]
-                }
-                else {
-                    bus.$emit('set-loading')
-                    Vue.http.get(url, {
-                        timeout: REQUEST_TIMEOUT
-                    }).then(
-                        response => {
-                            bus.$emit('set-loading')
-                                // console.log(response)
-                            CACHE[url] = response.body
-                            this.tree = response.body
-                        },
-                        response => {
-                            bus.$emit('set-loading')
-                            bus.$emit('set-error', response.bodyText || '加载文件夹失败, 将自动重新尝试')
-                            setTimeout(() => {
-                                    this.fetchData()
-                                }, REQUEST_TIMEOUT + 500)
-                                // console.log('Fail to get tree', response)
+    },
+    watch: {
+        '$route': 'fetchData',
+    },
+    updated() {
+        console.log('folder updated')
+    },
+    mounted: function () {
+        this.fetchData()
+    },
+    computed: {
+        files() {
+            return this.tree.filter(e => e.type == 'file' && e.name.slice(-3) == '.md')
+        },
+        folders() {
+            return this.tree.filter(e => e.type == 'dir')
+        },
+        navList() {
+            var path = this.$route.params.path
+            if (path == '') {
+                return ROOT
+            }
+            else {
+                var p = '/folder'
+                var ret = path.slice(1).split('/').map(
+                    name => {
+                        p = p + '/' + name
+                        return {
+                            active: true,
+                            name: name,
+                            path: p
                         }
-                    )
-                }
-            },
+                    }
+                )
+                ret[ret.length - 1].active = false
+                return ACTIVE_ROOT.concat(ret)
+            }
         },
-        watch: {
-            '$route': 'fetchData',
-        },
-        updated() {
-            console.log('folder updated')
-        },
-        mounted: function () {
-            this.fetchData()
-        },
-        computed: {
-            files() {
-                return this.tree.filter(e => e.type == 'file' && e.name.slice(-3) == '.md')
-            },
-            folders() {
-                return this.tree.filter(e => e.type == 'dir')
-            },
-            navList() {
-                var path = this.$route.params.path
-                if (path == '') {
-                    return ROOT
-                }
-                else {
-                    var p = '/folder'
-                    var ret = path.slice(1).split('/').map(
-                        name => {
-                            p = p + '/' + name
-                            return {
-                                active: true,
-                                name: name,
-                                path: p
-                            }
-                        }
-                    )
-                    ret[ret.length - 1].active = false
-                    return ACTIVE_ROOT.concat(ret)
-                }
-            },
-        },
-    }
+    },
+}
 </script>
