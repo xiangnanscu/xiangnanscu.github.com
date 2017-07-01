@@ -19,7 +19,6 @@
 
 <script>
 export default {
-    template: f,
     props: {
         path: {
             type: String,
