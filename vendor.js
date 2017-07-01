@@ -3,6 +3,7 @@ require('./vendor.less')
 require("github-markdown-css")
 require("highlight/lib/vendor/highlight.js/styles/github.css") 
 marked = require('marked')
+hljs = require('highlight/lib/vendor/highlight.js/highlight.js').hljs
 jQuery = require('jquery/dist/jquery.min.js')
 require('bootstrap/dist/js/bootstrap.min.js')
 Vue = require('vue/dist/vue.runtime.min.js')
