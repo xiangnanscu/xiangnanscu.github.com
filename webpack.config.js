@@ -9,7 +9,19 @@ for (var key in process.env) {
   processEnvConstants[key] = JSON.stringify(process.env[key])
 }
 var extractCSS = new ExtractTextPlugin(`blog.vendor.[contenthash].css`)
-
+var BABEL_LOADER = {
+  loader: 'babel-loader',
+  options: {
+    presets: [
+      ['vue-app', {
+        "targets": {
+          "browsers": ["ie >= 9"]
+        }
+      }]
+    ],
+    babelrc: false,
+  }
+}
 module.exports = {
   entry: {
     main: process.env.VENDOR && `./vendor.js` || './app.js',
@@ -33,19 +45,7 @@ module.exports = {
     rules: [{
         test: /\.js$/,
         exclude: /(node_modules|bower_components)/,
-        use: {
-          loader: 'babel-loader',
-          options: {
-            presets: [
-              ['vue-app', {
-                "targets": {
-                  "browsers": ["ie >= 9"]
-                }
-              }]
-            ],
-            babelrc: false,
-          }
-        }
+        use: BABEL_LOADER,
       }, {
         test: /\.css$/,
         use: extractCSS.extract(["css-loader"]),
@@ -70,6 +70,7 @@ module.exports = {
         options: {
           // extractCSS: true,
           loaders: {
+            js: BABEL_LOADER,
             less: extractCSS.extract(["css-loader", "less-loader"]),
             // sass: extractCSS.extract(["css-loader", "sass-loader"]),
           }

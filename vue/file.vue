@@ -18,7 +18,7 @@
 </template>
 
 <script>
-import {PREFIX, CACHE, REQUEST_TIMEOUT, ACTIVE_ROOT, ROOT, ERROR_DISPLAY_TIME} from './app.vue' 
+import {PREFIX, CACHE, REQUEST_TIMEOUT, ACTIVE_ROOT, ROOT, ERROR_DISPLAY_TIME} from './varible.js' 
 console.log({PREFIX, CACHE, REQUEST_TIMEOUT, ACTIVE_ROOT, ROOT, ERROR_DISPLAY_TIME})
 
 export default {

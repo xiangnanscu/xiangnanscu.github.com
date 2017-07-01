@@ -9,24 +9,10 @@
 <script>
 import folderView from './folder.vue'
 import fileView from './file.vue'
-
+import {PREFIX, CACHE, REQUEST_TIMEOUT, ACTIVE_ROOT, ROOT, ERROR_DISPLAY_TIME} from './varible.js' 
+console.log({PREFIX, CACHE, REQUEST_TIMEOUT, ACTIVE_ROOT, ROOT, ERROR_DISPLAY_TIME})
 var bus = new Vue()
-var username = window.location.host.split('.')[0] || 'xiangnanscu'
-var PREFIX = 'https://api.github.com/repos/'+username+'/'+username+'.github.com/contents'
-var COMMIT_URL = 'https://api.github.com/repos/'+username+'/'+username+'.github.com/git/commits/'
-var REQUEST_TIMEOUT = 3000 // 请求github api的最长时间
-var ERROR_DISPLAY_TIME = 3000
-var CACHE = {}
-var ACTIVE_ROOT = [{
-    active: true,
-    name: 'home',
-    path: '/'
-}]
-var ROOT = [{
-    active: false,
-    name: 'home',
-    path: '/'
-}]
+
 marked.setOptions({
     highlight: function (code) {
         return hljs.highlightAuto(code).value;
