@@ -232,7 +232,7 @@ var fileView = {
             },
             response => {
               bus.$emit('set-loading')
-              bus.$emit('set-error', response.bodyText||'加载数据失败')
+              bus.$emit('set-error', response.bodyText||'加载数据失败, 请刷新页面尝试')
             }
           )
         }        
@@ -302,7 +302,7 @@ app = new Vue({
     bus.$on('set-loading', () => {this.loading = !this.loading})
     bus.$on('set-error', (message) => {
       this.error = message
-      setTimeout(() => {this.error = null}, 2000)
+      setTimeout(() => {this.error = null}, 3000)
     })
   },
   router: router,
