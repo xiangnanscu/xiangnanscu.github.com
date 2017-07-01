@@ -60,13 +60,7 @@ var router = new VueRouter({
     }, ],
 })
 
-export var PREFIX = PREFIX
-export var COMMIT_URL = COMMIT_URL
-export var REQUEST_TIMEOUT = REQUEST_TIMEOUT // 请求github api的最长时间
-export var ERROR_DISPLAY_TIME = ERROR_DISPLAY_TIME
-export var CACHE = CACHE
-export var ACTIVE_ROOT = ACTIVE_ROOT
-export var ROOT = ROOT
+export {PREFIX, CACHE, REQUEST_TIMEOUT, ACTIVE_ROOT, ROOT, ERROR_DISPLAY_TIME}
 
 export default {
     data() {
