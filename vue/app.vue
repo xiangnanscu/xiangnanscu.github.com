@@ -9,9 +9,7 @@
 <script>
 import folderView from './folder.vue'
 import fileView from './file.vue'
-import {PREFIX, CACHE, REQUEST_TIMEOUT, ACTIVE_ROOT, ROOT, ERROR_DISPLAY_TIME} from './varible.js' 
-console.log({PREFIX, CACHE, REQUEST_TIMEOUT, ACTIVE_ROOT, ROOT, ERROR_DISPLAY_TIME})
-var bus = new Vue()
+import {PREFIX, CACHE, REQUEST_TIMEOUT, ACTIVE_ROOT, ROOT, ERROR_DISPLAY_TIME, bus} from './varible.js' 
 
 marked.setOptions({
     highlight: function (code) {

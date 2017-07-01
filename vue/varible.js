@@ -1,4 +1,5 @@
 var username = window.location.host.split('.')[0] || 'xiangnanscu'
+export var bus = new Vue()
 export var PREFIX = 'https://api.github.com/repos/'+username+'/'+username+'.github.com/contents'
 export var COMMIT_URL = 'https://api.github.com/repos/'+username+'/'+username+'.github.com/git/commits/'
 export var REQUEST_TIMEOUT = 3000 // 请求github api的最长时间
