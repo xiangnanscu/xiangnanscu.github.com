@@ -18,7 +18,7 @@
 </template>
 
 <script>
-import {PREFIX, CACHE, REQUEST_TIMEOUT, ACTIVE_ROOT, ROOT, ERROR_DISPLAY_TIME} from './varible.js' 
+import {PREFIX, CACHE, REQUEST_TIMEOUT, ACTIVE_ROOT, ROOT, ERROR_DISPLAY_TIME, bus} from './varible.js' 
 
 export default {
     props: {
