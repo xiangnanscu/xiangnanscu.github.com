@@ -60,6 +60,7 @@ var router = new VueRouter({
     }, ],
 })
 
+export var CACHE = CACHE
 export default {
     data() {
         return {

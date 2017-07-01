@@ -127,8 +127,8 @@ if (process.env.OSS) {
   var OSSPlugin = require('webpack-oss-plugin')
   module.exports.plugins = (module.exports.plugins || []).concat([
     new OSSPlugin({
-      exclude: /.*\.(html|svg|woff|woff2|ttf|eot)$/,
-      // exclude: /.*\.(html)$/,
+      // exclude: /.*\.(html|svg|woff|woff2|ttf|eot)$/,
+      exclude: /.*\.(html)$/,
       ossOptions: {
         accessKeyId: process.env.OSS_ACCESS_KEY,
         accessKeySecret: process.env.OSS_ACCESS_KEY_SECRET,
