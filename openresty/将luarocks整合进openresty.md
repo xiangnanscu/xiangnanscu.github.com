@@ -12,7 +12,7 @@ $ ./configure --prefix=/usr/local/openresty/luajit \
     --with-lua-include=/usr/local/openresty/luajit/include/luajit-2.1
 $ make build && make install
 ```
-### 安装luasql-postgres
+## 安装luasql-postgres
 ```shell
 apt-get install libpq-dev
 luarocks PGSQL_INCDIR=/usr/include/postgresql/ install luasql-postgres
