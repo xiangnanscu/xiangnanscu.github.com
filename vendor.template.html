@@ -2,26 +2,26 @@
 <html>
   <head>
     <title><%= htmlWebpackPlugin.options.title %></title>
+    <style type="text/css">
+      .title {
+        font-size: 300%;
+        background-color: #eee;
+        padding: .5em .2em;
+        margin-bottom: 1em;
+      }
+      .container {
+        width: 980px;
+        margin: 10px auto;
+      }
+      .load {
+          position: absolute;   
+          top: 50%;   
+          left: 50%;   
+          font-size: 500%;
+          z-index: 100;
+      }
+    </style>
   </head>
-  <style type="text/css">
-    .title {
-      font-size: 300%;
-      background-color: #eee;
-      padding: .5em .2em;
-      margin-bottom: 1em;
-    }
-    .container {
-      width: 980px;
-      margin: 10px auto;
-    }
-    .load {
-        position: absolute;   
-        top: 50%;   
-        left: 50%;   
-        font-size: 500%;
-        z-index: 100;
-    }
-  </style>
   <body>
   <div id="app">
   </div>
