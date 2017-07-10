@@ -1,6 +1,6 @@
-#关于模板继承
+# 关于模板继承
 目前能想到 的是通过嵌套路由实现. 话不多说, 直接代码. 来自[这个链接](https://jsfiddle.net/yyx990803/L7hscd8h/)
-#template
+# template
 ```
 <script src="https://unpkg.com/vue/dist/vue.js"></script>
 <script src="https://unpkg.com/vue-router/dist/vue-router.js"></script>
@@ -14,7 +14,7 @@
   <router-view></router-view>
 </div>
 ```
-#script
+# script
 ```js
 const User = {
   template: `
