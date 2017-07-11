@@ -33,7 +33,7 @@
       <tbody>
         <tr v-for="folder in folders">
           <td style="border:0">
-            <router-link :to="'/folder/'+folder.path">{{folder.name}}</router-link>
+            <router-link :to="'/folder/'+folder.path" class="btn">{{folder.name}}</router-link>
           </td>
           <td style="border:0">
             <a class="btn btn-default" :href="folder.new_url">新文章</a>
