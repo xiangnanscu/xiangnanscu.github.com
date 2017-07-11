@@ -28,11 +28,6 @@
     </h3>
   </div>
   <div class="panel-body">
-    <ul v-for="folder in folders" class="nav nav-pills nav-stacked">
-      <li role="presentation">
-        <router-link :to="'/folder/'+folder.path">{{folder.name}}</router-link>
-      </li>
-    </ul>
 
     <table class="table table-hover">
       <tbody>
@@ -41,12 +36,11 @@
             <router-link :to="'/folder/'+folder.path">{{folder.name}}</router-link>
           </td>
           <td style="border:0">
-            <a class="btn btn-default" :href="folder.new_url">写文章</a>
+            <a class="btn btn-default" :href="folder.new_url">新文章</a>
           </td>
         </tr>
       </tbody>
     </table>
-
 
   </div>
 </div>
