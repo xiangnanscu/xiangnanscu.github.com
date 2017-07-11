@@ -2,7 +2,6 @@ var path = require('path')
 var webpack = require('webpack')
 var HtmlWebpackPlugin = require('html-webpack-plugin')
 var ExtractTextPlugin = require("extract-text-webpack-plugin")
-var UglifyJsPlugin = require("uglifyjs-webpack-plugin")
 
 var processEnvConstants = {}
 for (var key in process.env) {
@@ -91,12 +90,12 @@ module.exports = {
     new webpack.DefinePlugin({
       'process.env': processEnvConstants,
     }),
-    // new UglifyJsPlugin({
-    //   sourceMap: false,
-    //   compress: {
-    //     warnings: false
-    //   }
-    // }),
+    new webpack.optimize.UglifyJsPlugin({
+      sourceMap: true,
+      compress: {
+        warnings: false
+      }
+    }),
     new webpack.LoaderOptionsPlugin({
       minimize: true
     }),
