@@ -1,7 +1,6 @@
 require('babel-polyfill')
 require('./vendor.less')
-require("github-markdown-css")
-require("highlight/lib/vendor/highlight.js/styles/github.css") 
+require("github-markdown-css") 
 require('./dist/highlight.min.js')
 marked = require('marked')
 jQuery = require('jquery/dist/jquery.min.js')
