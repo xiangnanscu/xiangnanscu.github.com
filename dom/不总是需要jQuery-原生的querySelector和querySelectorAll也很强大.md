@@ -1,7 +1,9 @@
 
-基于CSS selector语法, IE 8 都支持. 够用了.比如你要查找这样的元素
+基于CSS selector语法, IE 8 都支持. 够用了. 比如你要查找这样的元素
 ```html
-<input name="login"/> within a <div class="user-panel main">
+<div class="user-panel main">
+  <input name="login"/>
+</div>
 ```
 那么这样:
 ```js
