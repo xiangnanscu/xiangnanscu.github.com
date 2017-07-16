@@ -1,5 +1,5 @@
 
-基于CSS selector语法, IE 8 都支持. 够用了. 比如你要查找这样的元素
+基于CSS selector语法, IE 8 都支持. 够用了. 比如你要查找符合这种条件的第一个`input`元素:
 ```html
 <div class="user-panel main">
   <input name="login"/>
