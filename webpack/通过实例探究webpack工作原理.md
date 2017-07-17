@@ -7,11 +7,11 @@ module.exports = {name: 'a'}
 ```
 var a = require('./a.js')
 module.exports = {name: 'b', dep: a}
+```
 # 打包入口文件main.js
 ```
 var b = require('./b.js')
 console.log(b)
-```
 ```
 # 最终文件bundle.js
 ```js
