@@ -1,4 +1,4 @@
-用webpack久了, 自然想了解下它是怎么让打包机制在浏览器可用的.
+用webpack久了, 自然想了解下它是怎么让模块机制在浏览器可用的.
 # 模块a.js 
 ```js
 module.exports = {name: 'a'}
