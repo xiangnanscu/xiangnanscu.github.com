@@ -10,6 +10,10 @@ lglob ~/path/*.lua 2>&1 | grep ' set '
 ```
 cd ~/path/ && lglob . 2>&1 | grep ' set '
 ```
+在openresty环境中, `ngx`是合法的全局变量, 但lglob仍然会报告出来, 再用一个grep过滤掉
+```
+lglob . 2>&1 | grep ' set ' | grep -v 'ngx'
+```
 得到的类似输出:
 ```
 root@i:~/ngx# lglob . 2>&1 | grep ' set '
