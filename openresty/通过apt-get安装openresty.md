@@ -6,3 +6,5 @@
    14  sudo apt-get update
    15  sudo apt-get install openresty
 ```
+参考:
+- https://openresty.org/cn/linux-packages.html
