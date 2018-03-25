@@ -12,9 +12,9 @@ N=20;find . -name "*.js" -o  -name "*.lua" | xargs grep  -roP ".{0,$N}\brouteTo\
 - https://www.gnu.org/software/findutils/manual/html_node/find_html/Shell-Pattern-Matching.html
 
 # 查找并替换字符
-例如想把所有lua文件里面的`mc.`字符替换为`resty.`
+例如想把所有lua文件里面的`mc.`字符替换为`resty.`,注意`.`需要转义`\.`
 ```shell
-find . -name "*.lua" -type f -exec sed -i 's/mc./resty./g' {} +
+find . -name "*.lua" -type f -exec sed -i 's/mc\./resty./g' {} +
 ```
 注意: mac os x 不适用此方法
 参考:
