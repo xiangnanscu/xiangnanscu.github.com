@@ -12,6 +12,7 @@ find . -name "*.lua" -exec lua-releng {} \; | grep -E "SETG|(global)"
 - https://segmentfault.com/a/1190000004297908
 # 优化后的源码
 如果源文件没有定义version变量，则会提示`WARNING: No "_VERSION" or "version" field found in`，看了下源码，貌似春哥对版本检查很重视，但对我来说没有什么用，反而还影响查看，于是直接删了相关代码
+
 ```
 #!/usr/bin/env perl
 
