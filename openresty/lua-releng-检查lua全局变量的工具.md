@@ -3,9 +3,9 @@
 ```
 apt-get install lua5.1
 ```
-该脚本只支持一个文件, 因此需要结合find使用:
+把这个文件下载到`/usr/bin`. 该脚本只支持一个文件, 因此需要结合find使用:
 ```
-find . -name "*.lua" -exec perl lua-releng {} \; 2>&1 | grep -E "SETG|(global)"
+find . -name "*.lua" -exec perl /usr/bin/lua-releng {} \; 2>&1 | grep -E "SETG|(global)"
 ```
 `2>&1` 意思是把标准错误输出重定向到标准输出。以便grep统一过滤和处理.
 
