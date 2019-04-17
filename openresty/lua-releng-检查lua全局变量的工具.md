@@ -13,7 +13,7 @@ find . -name "*.lua" -exec perl /usr/bin/lua-releng {} \; 2>&1 | grep -E "SETG|(
 - https://github.com/openresty/openresty-devel-utils/blob/master/lua-releng
 - https://segmentfault.com/a/1190000004297908
 
-删掉一些影响查看结果的语句
+注释一些影响查看结果的语句
 ```
 #!/usr/bin/env perl
 
@@ -106,12 +106,12 @@ sub process_file {
         }
     }
     if (!$found_ver) {
-        w("WARNING: No \"_VERSION\" or \"version\" field found in `$file`.");
+        # w("WARNING: No \"_VERSION\" or \"version\" field found in `$file`.");
     }
     close $in;
 
-    
-    p("\top no.\tline\tinstruction\targs\t; code");
+    # p("Checking use of Lua global variables in file $file...");
+    # p("\top no.\tline\tinstruction\targs\t; code");
     blank("luac -p -l $file | grep -E '[GS]ETGLOBAL' | grep -vE '\\<(require|type|tostring|error|ngx|ndk|jit|setmetatable|getmetatable|string|table|io|os|print|tonumber|math|pcall|xpcall|unpack|pairs|ipairs|assert|module|package|coroutine|[gs]etfenv|next|rawget|rawset|rawlen|select)\\>'");
     unless ($no_long_line_check) {
         p("Checking line length exceeding 80...");
